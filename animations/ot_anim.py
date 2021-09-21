@@ -62,7 +62,7 @@ class BarChartExample(Scene):
         left_tex = Tex(r'Given $\alpha=\sum_{i=1}^n a_i \delta_{x_i}$, $\beta=\sum_{i=1}^m b_i \delta_{y_i}$').scale(0.5).move_to(LEFT*3).shift(3*UP)
         self.add(left_tex)
 
-        ot_tex = Tex(r'Find $p^*_{i.j} = \arg\min_{p_{i.j}} \sum_{i,j} c(x_i,y_j)p_{i,j} + \epsilon \log \frac{p_{i,j}}{a_ib_j}$').scale(0.5).shift(2.5*UP).shift(0.5*LEFT)
+        ot_tex = Tex(r'Find $p^*_{i.j} = \arg\min_{p_{i.j}} \sum_{i,j} c(x_i,y_j)p_{i,j} + \epsilon p_{i,j} \log \frac{p_{i,j}}{a_ib_j}$').scale(0.5).shift(2.5*UP).shift(0.5*LEFT)
         self.add(ot_tex)
 
         marginal_1 = Tex(r'subject to $\sum_i p_{i,j} = b_j$, $\sum_j p_{i,j} = a_i$').scale(0.5).shift(2*UP).shift(LEFT)
