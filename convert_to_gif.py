@@ -9,9 +9,12 @@ def convert_mp4_to_jpgs(path, out_dir):
     video_capture = cv2.VideoCapture(path)
     still_reading, image = video_capture.read()
     frame_count = 0
+    fp_count = 0
     while still_reading:
-        fp = os.path.join(out_dir, f"frame_{frame_count:03d}.jpg")
-        cv2.imwrite(fp, image)
+        if frame_count % 3 ==0 :
+            fp = os.path.join(out_dir, "frame_{0}.jpg".format(fp_count))
+            cv2.imwrite(fp, image)
+            fp_count+=1
         
         # read next image
         still_reading, image = video_capture.read()
@@ -21,10 +24,15 @@ def convert_mp4_to_jpgs(path, out_dir):
 
 
 def make_gif(frame_folder, name="test"):
-    images = glob.glob(f"{frame_folder}/*.jpg")
-    images.sort()
+    #images = glob.glob(f"{frame_folder}/*.jpg")
+    images = os.listdir(frame_folder)
+    N = len(images)
+    images = [os.path.join(frame_folder, "frame_{0}.jpg".format(i)) for i in range(N)]
     frames = [Image.open(image) for image in images]
     frame_one = frames[0]
+    w,h = frame_one.size
+    # left upper, right lower
+    frames = [f.crop((30, 0, w-30, h)) for f in frames ]
     frame_one.save(f"{name}.gif", format="GIF", append_images=frames,
                    save_all=True, duration=50, loop=0)
 
