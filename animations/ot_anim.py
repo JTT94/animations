@@ -52,7 +52,15 @@ class OTScene(MovingCameraScene):
         geom = pointcloud.PointCloud(x, y, epsilon=1e-2)
         out = sinkhorn.sinkhorn(geom, a, b)
         P = geom.transport_from_potentials(out.f, out.g)        
+        print(P)
+        print(P.max().shape)
         P = P / P.max()
+        P = P.T
+        print(P)
+        print(a)
+        print(P.sum(axis=0))
+        print(b)
+        print(P.sum(axis=1))
 
         
         # hist
