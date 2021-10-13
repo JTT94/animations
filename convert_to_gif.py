@@ -34,7 +34,7 @@ def make_gif(frame_folder, name="test"):
     # left upper, right lower
     frames = [f.crop((30, 0, w-30, h)) for f in frames ]
     frame_one.save(f"{name}.gif", format="GIF", append_images=frames,
-                   save_all=True, duration=50, loop=0)
+                   save_all=True, duration=20, loop=0)
 
 
 if __name__ == "__main__":
